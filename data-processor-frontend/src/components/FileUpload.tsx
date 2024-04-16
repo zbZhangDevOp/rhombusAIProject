@@ -57,11 +57,6 @@ const FileUpload: React.FC = () => {
   // This state is used to store the data types of the processed data.
   const [dataTypes, setDataTypes] = useState<DataTypes>({});
 
-  // This state is used to store the user's data type overrides.
-  const [userDataTypeOverrides, setUserDataTypeOverrides] = useState<{
-    [key: string]: string;
-  }>({});
-
   // This function is called when the user selects a file.
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -127,12 +122,11 @@ const FileUpload: React.FC = () => {
               <TableRow>
                 {Object.keys(processedData[0]).map((key) => (
                   <TableHead key={key}>
-                    <div className="mb-2">{key}</div>
                     <select
-                      value={userDataTypeOverrides[key] || dataTypes[key]}
+                      value={dataTypeMappings[dataTypes[key]]}
                       onChange={(e) => {
-                        setUserDataTypeOverrides({
-                          ...userDataTypeOverrides,
+                        setDataTypes({
+                          ...dataTypes,
                           [key]: e.target.value,
                         });
                       }}
@@ -152,10 +146,7 @@ const FileUpload: React.FC = () => {
                 <TableRow key={index}>
                   {Object.keys(row).map((key) => (
                     <TableCell key={key} className="font-medium">
-                      {convertToDisplayValue(
-                        row[key],
-                        userDataTypeOverrides[key] || dataTypes[key]
-                      )}
+                      {convertToDisplayValue(row[key], dataTypes[key])}
                     </TableCell>
                   ))}
                 </TableRow>
