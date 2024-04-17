@@ -29,7 +29,8 @@ const dataTypeMappings: { [key: string]: string } = {
   float32: "Float",
   bool: "Boolean",
   "datetime64[ns]": "Date/Time",
-  "timedelta[ns]": "Date/Time",
+  "timedelta[ns]": "Time Delta (ms)",
+  "timedelta64[ns]": "Time Delta (ms)",
   category: "Category",
   complex: "Complex Number",
 };
@@ -42,6 +43,8 @@ const availableDataTypes = [
   "Boolean",
   "Date/Time",
   "Category",
+  "Time Delta (ms)",
+  "Complex Number",
 ];
 
 interface DataTypes {
@@ -84,6 +87,8 @@ const FileUpload: React.FC = () => {
         const responseData = JSON.parse(response.data.data);
         setProcessedData(responseData);
         setDataTypes(response.data.dataTypes);
+        console.log(response.data.dataTypes);
+        console.log(responseData);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
