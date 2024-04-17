@@ -32,7 +32,6 @@ const dataTypeMappings: { [key: string]: string } = {
   "timedelta[ns]": "Time Delta (ms)",
   "timedelta64[ns]": "Time Delta (ms)",
   category: "Category",
-  complex: "Complex Number",
 };
 
 // Following is a list of available data types that the user can choose from.
